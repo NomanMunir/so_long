@@ -6,7 +6,7 @@
 /*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:12:52 by abashir           #+#    #+#             */
-/*   Updated: 2023/08/10 15:27:04 by abashir          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:38:39 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <math.h>
 # include "minilibx/mlx.h"
 #include "get_next_line/get_next_line.h"
-#include "get_next_line/get_next_line_bonus.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdbool.h>
 
 typedef struct	s_data {
 	void	*img;

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:04:04 by nmunir            #+#    #+#             */
-/*   Updated: 2023/08/05 13:17:44 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/10 16:11:22 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "get_next_line.h"
 
 char	*ft_get_remaining_str(int fd, char *rem_str)
@@ -22,7 +21,7 @@ char	*ft_get_remaining_str(int fd, char *rem_str)
 	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
-	while (!ft_strchr(rem_str, '\n') && byt != 0)
+	while (!ft_strchr_gnl(rem_str, '\n') && byt != 0)
 	{
 		byt = read(fd, buff, BUFFER_SIZE);
 		if (byt < 0 || !buff)
@@ -32,7 +31,7 @@ char	*ft_get_remaining_str(int fd, char *rem_str)
 			return (NULL);
 		}
 		buff[byt] = '\0';
-		rem_str = ft_strjoin(rem_str, buff);
+		rem_str = ft_strjoin_gnl(rem_str, buff);
 	}
 	free(buff);
 	return (rem_str);
@@ -40,16 +39,16 @@ char	*ft_get_remaining_str(int fd, char *rem_str)
 
 char	*get_next_line(int fd)
 {
-	static char	*rem_str;
+	static char	*rem_str[MAX_FD];
 	char		*first_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD)
 		return (NULL);
-	rem_str = ft_get_remaining_str(fd, rem_str);
-	if (!rem_str)
+	rem_str[fd] = ft_get_remaining_str(fd, rem_str[fd]);
+	if (!rem_str[fd])
 		return (NULL);
-	first_line = ft_get_first_line(rem_str);
-	rem_str = ft_get_new_rem_str(rem_str);
+	first_line = ft_get_first_line(rem_str[fd]);
+	rem_str[fd] = ft_get_new_rem_str(rem_str[fd]);
 	return (first_line);
 }
 

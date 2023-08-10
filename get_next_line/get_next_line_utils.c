@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:03:56 by nmunir            #+#    #+#             */
-/*   Updated: 2023/08/05 13:21:08 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/10 16:12:35 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_gnl(char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_gnl(char *s, int c)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ char	*ft_strchr(char *s, int c)
 	if (!s)
 		return (0);
 	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
+		return ((char *)&s[ft_strlen_gnl(s)]);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char) c)
@@ -42,7 +42,7 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *left_str, char *buff)
+char	*ft_strjoin_gnl(char *left_str, char *buff)
 {
 	size_t	i;
 	char	*str;
@@ -56,7 +56,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 	}
 	if (!buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
+	str = malloc(sizeof(char) * ((ft_strlen_gnl(left_str) + ft_strlen_gnl(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
@@ -112,7 +112,7 @@ char	*ft_get_new_rem_str(char *rem_str)
 		free(rem_str);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(rem_str) - i + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(rem_str) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;

@@ -6,17 +6,14 @@
 #    By: abashir <abashir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 15:18:50 by abashir           #+#    #+#              #
-#    Updated: 2023/08/10 15:23:24 by abashir          ###   ########.fr        #
+#    Updated: 2023/08/10 16:08:56 by abashir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libsolong.a
 
-get_next_line_src = "get_next_line/"
-
 SRC = 	get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
-		parsing.c \
 		
 
 OBJ = $(SRC:.c=.o)
@@ -26,8 +23,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
 all:$(NAME)
-	cc $(CFLAGS) parsing.c minilibx/libmlx.a $(NAME) -framework OpenGL -framework AppKit
-	./a.out
+	cc $(CFLAGS) parsing.c minilibx/libmlx.a $(NAME) -framework OpenGL -framework AppKit && ./a.out
+	
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
