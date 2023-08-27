@@ -1,0 +1,7 @@
+solong.code-workspace
+.vscode
+*.o
+*/*.o
+a.out
+*.a
+*/*.a
