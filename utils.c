@@ -1,19 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 13:38:05 by nmunir            #+#    #+#             */
+/*   Updated: 2023/08/27 15:03:45 by nmunir           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_strl(char *str)
+size_t	ft_strspn(const char *s, char c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-int	ft_strchr(char *s, char c)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -29,10 +30,4 @@ void	ft_print_array(char **array, int row)
 {
 	for (int i = 0; i < row; i++)
 		printf("%s\n", array[i]);
-}
-
-void	ft_putstr(char *s)
-{
-	if (s != NULL)
-		write(1, s, ft_strl(s));
 }

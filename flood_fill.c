@@ -16,7 +16,7 @@ void	flood_fill(char **tab, t_point size, t_point cur, char to_fill)
 int	check_flood(char **array, t_map *m)
 {
 	char	**f;
-	int		i;
+	size_t	i;
 	t_point	pt;
 
 	i = 0;
@@ -40,9 +40,9 @@ int	check_flood(char **array, t_map *m)
 
 t_point	*create_collect(char **array, t_map map_data, int c)
 {
-	int			i;
-	int			j;
-	int			k;
+	size_t		i;
+	size_t		j;
+	size_t		k;
 	t_point		*collect;
 
 	i = 0;
@@ -50,7 +50,7 @@ t_point	*create_collect(char **array, t_map map_data, int c)
 	collect = malloc(sizeof(t_point) * (c + 1));
 	while (i < (map_data).size.x)
 	{
-		j = ft_strchr(array[i], 'C');
+		j = ft_strspn(array[i], 'C');
 		if (j != 0)
 			collect[k++] = (t_point){i, j};
 		i++;

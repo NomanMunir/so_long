@@ -1,25 +1,24 @@
-
 #include "so_long.h"
 
-int	is_map_rect(char **array, int row)
+size_t	is_map_rect(char **array, size_t row)
 {
-	int	i;
+	size_t	i;
 
 	i = 1;
 	while (i < row)
 	{
-		if (ft_strl(array[i]) != ft_strl(array[i - 1]))
+		if (ft_strlen(array[i]) != ft_strlen(array[i - 1]))
 			return (0);
 		i++;
 	}
-	i = ft_strl(array[0]);
+	i = ft_strlen(array[0]);
 	return (i);
 }
 
-int	is_map_closed(char **array, t_map *map_data)
+size_t	is_map_closed(char **array, t_map *map_data)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (i < map_data->size.x)
@@ -41,17 +40,17 @@ int	is_map_closed(char **array, t_map *map_data)
 	return (1);
 }
 
-int	ft_counter(char **array, t_map *map_data, char ch)
+size_t	ft_counter(char **array, t_map *map_data, char ch)
 {
-	int		count;
-	int		i;
-	int		j;
+	size_t		count;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	count = 0;
 	while (i < (map_data)->size.x)
 	{
-		j = ft_strchr(array[i], ch);
+		j = ft_strspn(array[i], ch);
 		if (j != 0)
 		{
 			count++;
@@ -67,12 +66,12 @@ int	ft_counter(char **array, t_map *map_data, char ch)
 	return (count);
 }
 
-int	check_count(char **array, t_map *map_data)
+size_t	check_count(char **array, t_map *map_data)
 {
-	int		e;
-	int		s;
-	int		c;
-	int		i;
+	size_t		e;
+	size_t		s;
+	size_t		c;
+	size_t		i;
 
 	i = 0;
 	c = ft_counter(array, map_data, 'C');
@@ -84,29 +83,29 @@ int	check_count(char **array, t_map *map_data)
 		return (0);
 }
 
-int	check_map(char **array, t_map *map_data)
+size_t	check_map(char **array, t_map *map_data)
 {
 	map_data->size.y = is_map_rect(array, map_data->size.x);
 	if (map_data->size.y == 0)
 	{
-		ft_putstr("Error\nThe map is not rectangular");
+		ft_putstr_fd("Error\nThe map is not rectangular", 2);
 		return (0);
 	}
 	if (!is_map_closed(array, map_data))
 	{
-		ft_putstr("Error\nThe map is not enclosed");
+		ft_putstr_fd("Error\nThe map is not enclosed", 2);
 		return (0);
 	}
 	if (!check_count(array, map_data))
 	{
-		ft_putstr("Error\n");
-		ft_putstr("Map contain invalid no. of exit/collectible or start");
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Map contain invalid no. of exit/collectible or start", 2);
 		return (0);
 	}
 	map_data->c_ar = create_collect(array, *map_data, map_data->c);
 	if (!check_flood(array, map_data))
 	{
-		ft_putstr("Error\nPlayer can't reach collectible/exit");
+		ft_putstr_fd("Error\nPlayer can't reach collectible/exit", 2);
 		return (0);
 	}
 	return (1);
