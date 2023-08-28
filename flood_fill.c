@@ -11,15 +11,29 @@ void	flood_fill(char **tab, t_point size, t_point cur, char to_fill)
 	flood_fill(tab, size, (t_point){cur.x, cur.y - 1}, to_fill);
 	flood_fill(tab, size, (t_point){cur.x, cur.y + 1}, to_fill);
 }
-
+#include <string.h>
+char **copy_array(char **original, t_map map)
+{
+	int i = 0;
+	char **copy = NULL;
+	while (i < map.size.x)
+	{
+		strcpy(copy[i], original[i]);
+		i++;
+	}
+	return (copy);
+}
 int	check_flood(char **array, t_map *m)
 {
-	char	**f;
+	char	**f = NULL;
 	size_t	i;
 	t_point	pt;
+	int		fd;
 
 	i = 0;
-	f = array;
+	fd = open("maps/42_map.ber", O_RDONLY);
+	f = create_array(fd, m);
+	close(fd);
 	f[m->s.x][m->s.y] = '0';
 	flood_fill(f, m->size, m->s, '0');
 	if (f[m->e.x - 1][m->e.y] != 'F' && f[m->e.x + 1][m->e.y] != 'F' && \
@@ -34,7 +48,6 @@ int	check_flood(char **array, t_map *m)
 		i++;
 	}
 	return (1);
-
 }
 
 t_point	*create_collect(char **array, t_map map_data, int c)

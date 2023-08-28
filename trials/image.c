@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 11:40:58 by abashir           #+#    #+#             */
-/*   Updated: 2023/08/10 15:04:49 by abashir          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:58:02 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx/mlx.h"
 #include <stdlib.h>
 #include <math.h>
+#include "../minilibx/mlx.h"
 
 typedef struct	s_data {
 	void	*img;
@@ -35,7 +35,7 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-	char	*relative_path = "./princess_2.xpm";
+	char	*relative_path = "../images/princess_2.xpm";
 	int		img_width;
 	int		img_height;
 
@@ -44,6 +44,6 @@ int	main(void)
 	img.img	 = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 115, 0);
 	mlx_loop(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:12:52 by abashir           #+#    #+#             */
-/*   Updated: 2023/08/28 12:18:11 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/28 18:44:55 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,23 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	size_t	bits_per_pixel;
-	size_t	line_length;
-	size_t	endian;
-}				t_data;
-
 typedef struct s_point
 {
 	size_t		x;
 	size_t		y;
 }				t_point;
+
+typedef struct s_data {
+	void 	*mlx_ptr;
+	void 	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	t_point s;
+}				t_data;
+
 
 typedef struct s_map
 {

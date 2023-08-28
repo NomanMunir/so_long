@@ -6,54 +6,85 @@
 /*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:01:26 by nmunir            #+#    #+#             */
-/*   Updated: 2023/08/28 12:47:59 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/28 19:07:30 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#define KEY_ESC 53
+// int on_destroy(t_var *data)
+// {
+// 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+// 	mlx_destroy_display(data->mlx_ptr);
+// 	free(data->mlx_ptr);
+// 	exit(0);
+// 	return (0);
+// }
+ 
+int key_press(int keycode, t_data *img) {
 
-#define KEY_ESC 53 // Key code for the ESC key
+    if (keycode == 124)
+        {
 
-int close_window(void *param) {
-    (void)param; // Suppress unused parameter warning
-    printf("Window is closing...\n");
-    exit(0);
-}
-
-int key_press(int keycode, void *param) {
-    (void)param; // Suppress unused parameter warning
-
-    if (keycode == KEY_ESC) {
-        printf("ESC key pressed. Exiting...\n");
-        exit(0);
-    }
-
-    printf("Key with code %d pressed.\n", keycode);
+        }
+    printf("Key pressed: %d\n", keycode);
     return 0;
 }
 
-int main() {
-    void *mlx;
-    void *window;
+void    put_image(char c, int x, int y, t_data img)
+{
+	int		img_width;
+	int		img_height;
 
-    mlx = mlx_init();
-    if (!mlx) {
-        fprintf(stderr, "Error initializing MiniLibX\n");
-        return 1;
-    }
-
-    window = mlx_new_window(mlx, 800, 600, "Keyboard Events Example");
-    if (!window) {
-        fprintf(stderr, "Error creating window\n");
-        return 1;
-    }
-
-    mlx_hook(window, 2, 1L << 0, key_press, mlx);
-    mlx_hook(window, 17, 1L << 17, close_window, mlx);
-
-    mlx_loop(mlx);
-    return 0;
+    if (c == 'P')
+        img.img	= mlx_xpm_file_to_image(img.mlx_ptr, "./assets/princess.xpm", &img_width, &img_height);
+    else if (c == '1')
+        img.img	= mlx_xpm_file_to_image(img.mlx_ptr, "./assets/wall.xpm", &img_width, &img_height);
+    else if (c == 'C')
+        img.img	= mlx_xpm_file_to_image(img.mlx_ptr, "./assets/cake.xpm", &img_width, &img_height);
+    else if (c == 'E')
+        img.img	= mlx_xpm_file_to_image(img.mlx_ptr, "./assets/exit.xpm", &img_width, &img_height);
+    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+	&img.endian);
+	mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, img.img, y * 42, x * 42);    
 }
+int	main(void)
+{
+    int		fd;
+	char	**array;
+	t_map	map_data;
+
+	fd = open("maps/42_map.ber", O_RDONLY);
+	array = create_array(fd, &map_data);
+	check_map(array, &map_data);
+	ft_print_array(array, map_data.size.x);
+    
+	t_data	img;
+	int		img_width;
+	int		img_height;
+    int i = 0;
+    int j = 0;
+    img.mlx_ptr = mlx_init();
+    img.win_ptr = mlx_new_window(img.mlx_ptr, map_data.size.y * 42, map_data.size.x * 42, "Hello world!");
+    while (array[i])
+    {
+        j = 0;
+        while (array[i][j])
+        {
+            img.img	= mlx_xpm_file_to_image(img.mlx_ptr, "./assets/sky.xpm", &img_width, &img_height);
+	        img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+	        &img.endian);
+	        mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, img.img, j * 42, i * 42);
+            put_image(array[i][j], i, j, img);
+            j++;
+        }
+        i++;        
+    }
+    img.s = map_data.s;
+    mlx_hook(img.win_ptr, 2, 1L << 0, key_press, &img);
+	mlx_loop(img.mlx_ptr);
+}
+
 	// int		fd;
 	// char	**array;
 	// t_map	map_data;
@@ -63,7 +94,6 @@ int main() {
 
 
 	// check_map(array, &map_data);
-	// ft_print_array(array, map_data.size.x);
     
 	//  printf("row: %d col: %d\n", row, col);
 	// close(fd);
