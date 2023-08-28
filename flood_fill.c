@@ -1,4 +1,3 @@
-
 #include "so_long.h"
 
 void	flood_fill(char **tab, t_point size, t_point cur, char to_fill)
@@ -23,14 +22,14 @@ int	check_flood(char **array, t_map *m)
 	f = array;
 	f[m->s.x][m->s.y] = '0';
 	flood_fill(f, m->size, m->s, '0');
-	if (f[m->e.x - 1][m->e.y] != 'F' && f[m->e.x + 1][m->e.y] != 'F')
-		if (f[m->e.x][m->e.y + 1] != 'F' && f[m->e.x][m->e.y - 1] != 'F')
+	if (f[m->e.x - 1][m->e.y] != 'F' && f[m->e.x + 1][m->e.y] != 'F' && \
+	f[m->e.x][m->e.y + 1] != 'F' && f[m->e.x][m->e.y - 1] != 'F')
 			return (0);
-	while (i < m->c - 1)
+	while (i < m->c)
 	{
 		pt = m->c_ar[i];
-		if (f[pt.x - 1][pt.y] != 'F' && f[pt.x + 1][pt.y] != 'F')
-			if (f[pt.x][pt.y + 1] != 'F' && f[pt.x][pt.y - 1] != 'F')
+		if (f[pt.x - 1][pt.y] != 'F' && f[pt.x + 1][pt.y] != 'F' && \
+		f[pt.x][pt.y + 1] != 'F' && f[pt.x][pt.y - 1] != 'F')
 				return (0);
 		i++;
 	}

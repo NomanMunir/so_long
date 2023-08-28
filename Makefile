@@ -6,7 +6,7 @@
 #    By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 15:18:50 by abashir           #+#    #+#              #
-#    Updated: 2023/08/27 15:40:20 by nmunir           ###   ########.fr        #
+#    Updated: 2023/08/28 12:41:36 by nmunir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,16 @@ CC = cc
 CFLAGS = -Wall -Werror #-Wextra
 FFLAGS = -framework OpenGL -framework AppKit
 
-all:$(NAME) libft
+all: $(NAME) libft minilibx
 	$(CC) main.c $(CFLAGS) $(FFLAGS) $(ARC) $(NAME)
 	./a.out
-	
-libft:
-	cd libft && $(make)
 
+libft:
+	cd libft && make
+
+minilibx:
+	cd minilibx && make
+	
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
@@ -41,11 +44,11 @@ bonus: $(OBJ)
 	ar rcs $(NAME) $(OBJ) 
 
 clean:
-	rm -f -v $(OBJ) libft/*.o
+	rm -f -v $(OBJ) libft/*.o minilibx/*.o
 	
 fclean: clean
-	rm -f $(NAME) libft/*.a
+	rm -f $(NAME) libft/*.a minilibx/*.a
 
 re: fclean all
 	
-.PHONY: all clean fclaen re
+.PHONY: all clean fclaen re libft minilibx

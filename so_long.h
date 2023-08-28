@@ -6,7 +6,7 @@
 /*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:12:52 by abashir           #+#    #+#             */
-/*   Updated: 2023/08/27 15:03:52 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/28 12:18:11 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct s_map
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	flood_fill(char **tab, t_point size, t_point cur, char to_fill);
-size_t	is_map_rect(char **array, size_t row);
-size_t	is_map_closed(char **array, t_map *map_data);
+bool	is_map_rect(char **array, size_t row);
+bool	is_map_closed(char **array, t_map *map_data);
 size_t	ft_counter(char **array, t_map *map_data, char ch);
 size_t	check_count(char **array, t_map *map_data);
 size_t	check_map(char **array, t_map *map_data);
@@ -57,6 +57,6 @@ size_t	ft_strspn(const char *s, char c);
 t_point	*create_collect(char **array, t_map map_data, int c);
 int		check_flood(char **array, t_map *m);
 void	ft_print_array(char **array, int row);
-char	**create_array(int fd, int *row);
+char	**create_array(int fd, t_map *m_data);
 
 #endif

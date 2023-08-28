@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-size_t	is_map_rect(char **array, size_t row)
+bool	is_map_rect(char **array, size_t row)
 {
 	size_t	i;
 
@@ -8,14 +8,13 @@ size_t	is_map_rect(char **array, size_t row)
 	while (i < row)
 	{
 		if (ft_strlen(array[i]) != ft_strlen(array[i - 1]))
-			return (0);
+			return (false);
 		i++;
 	}
-	i = ft_strlen(array[0]);
-	return (i);
+	return (true);
 }
 
-size_t	is_map_closed(char **array, t_map *map_data)
+bool	is_map_closed(char **array, t_map *map_data)
 {
 	size_t	i;
 	size_t	j;
@@ -31,13 +30,13 @@ size_t	is_map_closed(char **array, t_map *map_data)
 			while (array[i][j])
 			{
 				if (array[i][j] != '1')
-					return (0);
+					return (false);
 				j++;
 			}
 		}
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
 size_t	ft_counter(char **array, t_map *map_data, char ch)
@@ -85,7 +84,8 @@ size_t	check_count(char **array, t_map *map_data)
 
 size_t	check_map(char **array, t_map *map_data)
 {
-	map_data->size.y = is_map_rect(array, map_data->size.x);
+	printf("row %zu and %zu col\n", map_data->size.x, map_data->size.y);
+	is_map_rect(array, map_data->size.x);
 	if (map_data->size.y == 0)
 	{
 		ft_putstr_fd("Error\nThe map is not rectangular", 2);

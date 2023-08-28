@@ -6,7 +6,7 @@
 /*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:01:26 by nmunir            #+#    #+#             */
-/*   Updated: 2023/08/27 15:47:41 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/28 12:47:59 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ int key_press(int keycode, void *param) {
     return 0;
 }
 
-int	main(void)
-{
-
-	void *mlx;
+int main() {
+    void *mlx;
     void *window;
 
     mlx = mlx_init();
@@ -54,24 +52,20 @@ int	main(void)
     mlx_hook(window, 17, 1L << 17, close_window, mlx);
 
     mlx_loop(mlx);
-
+    return 0;
+}
 	// int		fd;
-	// int		row;
 	// char	**array;
 	// t_map	map_data;
 
-	// row = 0;
 	// fd = open("maps/42_map.ber", O_RDONLY);
-	// array = create_array(fd, &row);
-	// map_data.size.x = row;
+	// array = create_array(fd, &map_data);
 
-	
+
 	// check_map(array, &map_data);
-	
-	// // ft_print_array(array, row);
-	// //printf("row: %d col: %d\n", row, col);
-	// // for(int i = 0; i < row; i++)
-	// // 	printf("%s\n", array[i]);
+	// ft_print_array(array, map_data.size.x);
+    
+	//  printf("row: %d col: %d\n", row, col);
 	// close(fd);
-	return (0);
-}
+// 	return (0);
+// }
