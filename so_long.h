@@ -6,7 +6,7 @@
 /*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:12:52 by abashir           #+#    #+#             */
-/*   Updated: 2023/08/28 18:44:55 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/29 13:23:58 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,6 @@ typedef struct s_point
 	size_t		y;
 }				t_point;
 
-typedef struct s_data {
-	void 	*mlx_ptr;
-	void 	*win_ptr;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	t_point s;
-}				t_data;
-
-
 typedef struct s_map
 {
 	t_point			size;
@@ -48,18 +36,34 @@ typedef struct s_map
 	t_point			e;
 	size_t			c;
 	t_point			*c_ar;
+	char 			**array;
 }				t_map;
+
+typedef struct s_data {
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		height;
+	int		width;
+	int		cake;
+	int		steps;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	struct s_map	map;
+}				t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	flood_fill(char **tab, t_point size, t_point cur, char to_fill);
-bool	is_map_rect(char **array, size_t row);
-bool	is_map_closed(char **array, t_map *map_data);
-size_t	ft_counter(char **array, t_map *map_data, char ch);
-size_t	check_count(char **array, t_map *map_data);
-size_t	check_map(char **array, t_map *map_data);
+bool	is_map_rect(t_map map);
+bool	is_map_closed(t_map map);
+size_t	ft_counter(t_map *map_data, char ch);
+size_t	check_count(t_map *map_data);
+size_t	check_map(t_map *map_data);
 size_t	ft_strspn(const char *s, char c);
-t_point	*create_collect(char **array, t_map map_data, int c);
-int		check_flood(char **array, t_map *m);
+void	create_collect(t_map *map_data, int c);
+int		check_flood(t_map m);
 void	ft_print_array(char **array, int row);
 char	**create_array(int fd, t_map *m_data);
 

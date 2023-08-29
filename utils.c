@@ -6,7 +6,7 @@
 /*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:38:05 by nmunir            #+#    #+#             */
-/*   Updated: 2023/08/27 15:03:45 by nmunir           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:14:29 by nmunir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 size_t	ft_strspn(const char *s, char c)
 {
 	size_t	i;
+	size_t count;
 
 	i = 0;
+	count = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
-			return (i);
+			count++;
 		i++;
 	}
-	return (0);
+	return (count);
 }
 
 void	ft_print_array(char **array, int row)

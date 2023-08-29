@@ -6,7 +6,7 @@
 #    By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 15:18:50 by abashir           #+#    #+#              #
-#    Updated: 2023/08/28 13:30:40 by nmunir           ###   ########.fr        #
+#    Updated: 2023/08/29 16:05:52 by nmunir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ FFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME) libft minilibx
 	$(CC) main.c $(CFLAGS) $(FFLAGS) $(ARC) $(NAME)
-	./a.out
 
 libft:
 	cd libft && make
