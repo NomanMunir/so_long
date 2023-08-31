@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+         #
+#    By: abashir <abashir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 15:18:50 by abashir           #+#    #+#              #
-#    Updated: 2023/08/29 16:05:52 by nmunir           ###   ########.fr        #
+#    Updated: 2023/08/31 18:44:07 by abashir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,23 @@ NAME = libsolong.a
 
 SRC = 	get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
-		parsing.c \
+		create_array.c \
 		utils.c \
 		is_map_valid.c \
 		flood_fill.c \
+		error.c \
+		events.c \
+		move.c \
 		
-
 OBJ = $(SRC:.c=.o)
 ARC = libft/libft.a minilibx/libmlx.a
 CC = cc
 
-CFLAGS = -Wall -Werror #-Wextra
+CFLAGS = #-Wall -Werror -Wextra
 FFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME) libft minilibx
-	$(CC) main.c $(CFLAGS) $(FFLAGS) $(ARC) $(NAME)
+	$(CC) main.c $(CFLAGS) $(FFLAGS) $(ARC) $(NAME) -o so_long.out
 
 libft:
 	cd libft && make
