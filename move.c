@@ -16,6 +16,8 @@ void	put_image(char c, int x, int y, t_data img)
 		img.img = mlx_xpm_file_to_image(img.mlx_ptr, E_PATH, &img.w, &img.h);
 	else
 		img.img = mlx_xpm_file_to_image(img.mlx_ptr, S_PATH, &img.w, &img.h);
+	if (!img.img)
+		error_handling(10);
 	mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, \
 	img.img, y * IMAGE_SIZE, x * IMAGE_SIZE);
 }

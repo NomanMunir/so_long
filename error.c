@@ -3,7 +3,7 @@
 
 void	error_handling(int error)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error:\n", 2);
 	if (error == 1)
 		ft_putstr_fd("The map is not rectangular\n", 2);
 	if (error == 2)
@@ -17,13 +17,13 @@ void	error_handling(int error)
 	if (error == 6)
 		ft_putstr_fd("File(s) not found\n", 2);
 	if (error == 7)
-		ft_putstr_fd("Invalid map dimensions", 2);
+		ft_putstr_fd("Invalid map dimensions\n", 2);
 	if (error == 8)
-		ft_putstr_fd("Map contain invalid no. of exit/collectible or start", 2);
+		ft_putstr_fd("Map has invalid no. of exit/collectible or start\n", 2);
 	if (error == 9)
-		ft_putstr_fd("Player can't reach collectible/exit", 2);
+		ft_putstr_fd("Player can't reach collectible/exit\n", 2);
 	if (error == 10)
-		ft_putstr_fd("File(s) empty", 2);
+		ft_putstr_fd("File(s) empty or crupted\n", 2);
 	exit(1);
 }
 
@@ -41,14 +41,7 @@ void	ft_check_file(int argc, char **argv)
 	if (open(C_PATH, O_RDONLY) < 0 || open(E_PATH, O_RDONLY) < 0 \
 	|| open(S_PATH, O_RDONLY) < 0)
 		error_handling(6);
-	if (read(open(argv[1], O_RDONLY), &buf, 1) < 1 || \
-	read(open(P_PATH, O_RDONLY), &buf, 1) < 1)
-		error_handling(10);
-	if (read(open(W_PATH, O_RDONLY), &buf, 1) < 1 || \
-	read(open(C_PATH, O_RDONLY), &buf, 1) < 1)
-		error_handling(10);
-	if (read(open(E_PATH, O_RDONLY), &buf, 1) < 1 || \
-	read(open(S_PATH, O_RDONLY), &buf, 1) < 1)
+	if (read(open(argv[1], O_RDONLY), &buf, 1) < 1)
 		error_handling(10);
 }
 

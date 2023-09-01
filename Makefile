@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abashir <abashir@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 15:18:50 by abashir           #+#    #+#              #
-#    Updated: 2023/08/31 18:44:07 by abashir          ###   ########.fr        #
+#    Updated: 2023/09/01 10:49:58 by nmunir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ FFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME) libft minilibx
 	$(CC) main.c $(CFLAGS) $(FFLAGS) $(ARC) $(NAME) -o so_long.out
+	./so_long.out "maps/map.ber"
 
 libft:
 	cd libft && make
