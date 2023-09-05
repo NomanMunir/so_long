@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 16:36:47 by abashir           #+#    #+#             */
+/*   Updated: 2023/09/05 15:04:30 by abashir          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
 
 void	error_handling(int error)
 {
-	ft_putstr_fd("Error:\n", 2);
+	printf("Error\n %d", error);
+	ft_putstr_fd("Error\n", 2);
 	if (error == 1)
 		ft_putstr_fd("The map is not rectangular\n", 2);
 	if (error == 2)
@@ -23,27 +35,40 @@ void	error_handling(int error)
 	if (error == 9)
 		ft_putstr_fd("Player can't reach collectible/exit\n", 2);
 	if (error == 10)
-		ft_putstr_fd("File(s) empty or crupted\n", 2);
+		ft_putstr_fd("File(s) empty/not found or corrupted\n", 2);
+	if (error == 11)
+		ft_putstr_fd("Map is not valid\n", 2);
 	exit(1);
+}
+
+void	error_handling_free(int error, char **map)
+{
+	ft_free_arr(map);
+	error_handling(error);
+}
+
+int	open_file(char *path)
+{
+	int		fd;
+	char	*buf;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0 || read(fd, &buf, 1) < 1)
+		error_handling(10);
+	close(fd);
+	return (fd);
 }
 
 void	ft_check_file(int argc, char **argv)
 {
-	char	*buf;
-
 	if (argc != 2)
 		error_handling(4);
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
 		error_handling(5);
-	if (open(argv[1], O_RDONLY) < 0 || open(P_PATH, O_RDONLY) < 0 \
-	|| open(W_PATH, O_RDONLY) < 0)
-		error_handling(6);
-	if (open(C_PATH, O_RDONLY) < 0 || open(E_PATH, O_RDONLY) < 0 \
-	|| open(S_PATH, O_RDONLY) < 0)
-		error_handling(6);
-	if (read(open(argv[1], O_RDONLY), &buf, 1) < 1)
-		error_handling(10);
+	open_file(argv[1]);
+	open_file(P_PATH);
+	open_file(E_PATH);
+	open_file(C_PATH);
+	open_file(W_PATH);
+	open_file(S_PATH);
 }
-
-
-

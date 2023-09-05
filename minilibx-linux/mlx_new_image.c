@@ -89,13 +89,13 @@ void	*mlx_int_new_xshm_image(t_xvar *xvar,int width,int height,int format)
     {
       img->pix = XShmCreatePixmap(xvar->display,xvar->root,img->shm.shmaddr,
 				  &(img->shm),width,height,xvar->depth);
-      img->type = MLX_TYPE_SHM_PIXMAP;
+      img->type = mlx_TYPE_SHM_PIXMAP;
     }
   else
     {
       img->pix = XCreatePixmap(xvar->display,xvar->root,
 			       width,height,xvar->depth);
-      img->type = MLX_TYPE_SHM;
+      img->type = mlx_TYPE_SHM;
     }
   if (xvar->do_flush)
     XFlush(xvar->display);
@@ -131,7 +131,7 @@ void	*mlx_int_new_image(t_xvar *xvar,int width, int height,int format)
   img->height = height;
   img->pix = XCreatePixmap(xvar->display,xvar->root,width,height,xvar->depth);
   img->format = format;
-  img->type = MLX_TYPE_XIMAGE;
+  img->type = mlx_TYPE_XIMAGE;
   if (xvar->do_flush)
     XFlush(xvar->display);
   return (img);

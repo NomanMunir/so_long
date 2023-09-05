@@ -14,9 +14,9 @@
 ** Internal settings for MiniLibX
 */
 
-#ifndef MLX_INT_H
+#ifndef mlx_INT_H
 
-# define MLX_INT_H
+# define mlx_INT_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -33,11 +33,11 @@
 /* #include	<X11/xpm.h> */
 
 
-# define MLX_TYPE_SHM_PIXMAP 3
-# define MLX_TYPE_SHM 2
-# define MLX_TYPE_XIMAGE 1
+# define mlx_TYPE_SHM_PIXMAP 3
+# define mlx_TYPE_SHM 2
+# define mlx_TYPE_XIMAGE 1
 
-# define MLX_MAX_EVENT LASTEvent
+# define mlx_MAX_EVENT LASTEvent
 
 
 # define ENV_DISPLAY "DISPLAY"
@@ -78,7 +78,7 @@ typedef struct	s_win_list
 	void				*mouse_param;
 	void				*key_param;
 	void				*expose_param;
-	t_event_list		hooks[MLX_MAX_EVENT];
+	t_event_list		hooks[mlx_MAX_EVENT];
 }				t_win_list;
 
 

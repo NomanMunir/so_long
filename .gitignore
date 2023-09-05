@@ -2,6 +2,8 @@ solong.code-workspace
 .vscode
 *.o
 */*.o
-a.out
+*.out
+*/*.out
 *.a
 */*.a
+so_long_tester
