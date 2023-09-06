@@ -3,67 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 12:29:34 by nmunir            #+#    #+#             */
-/*   Updated: 2023/07/18 18:51:07 by nmunir           ###   ########.fr       */
+/*   Created: 2023/07/08 13:46:07 by abashir           #+#    #+#             */
+/*   Updated: 2023/07/18 18:51:06 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_int_length(int n)
+static int	ft_nbr_len(long n)
 {
-	int			length;
-	long long	temp;
+	int	i;
 
-	temp = n;
-	length = 0;
-	if (temp < 0)
+	i = 0;
+	if (n < 0)
 	{
-		length++;
-		temp *= -1;
+		n = n * -1;
+		i++;
 	}
-	while (temp > 0)
-	{
-		length++;
-		temp /= 10;
-	}
-	return (length);
-}
-
-static char	*get_result(int size, char *str, long long n)
-{
+	if (n == 0)
+		i = 1;
 	while (n > 0)
 	{
-		str[size - 1] = (char)((n % 10) + '0');
-		size--;
-		n /= 10;
+		n = n / 10;
+		i++;
 	}
-	return (str);
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	int			int_length;
-	int			sign;
-	char		*result;
-	long long	longn;
+	int		i;
+	char	*new;
+	long	nbr;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	longn = n;
-	int_length = count_int_length(n);
-	if (longn < 0)
-	{
-		sign = -1;
-		longn *= -1;
-	}
-	result = (char *)malloc((int_length + 1) * sizeof(char));
-	if (result == NULL)
+	nbr = n;
+	i = ft_nbr_len(nbr);
+	new = (char *)malloc(sizeof(char) * (i + 1));
+	if (new == NULL)
 		return (NULL);
-	result[int_length] = '\0';
-	if (sign == -1)
-		result[0] = '-';
-	return (get_result(int_length, result, longn));
+	new[i] = '\0';
+	if (nbr < 0)
+	{
+		new[0] = '-';
+		nbr = nbr * -1;
+	}
+	if (nbr == 0)
+		new[0] = nbr + '0';
+	while (nbr > 0)
+	{
+		new[i - 1] = (nbr % 10) + '0';
+		nbr = nbr / 10;
+		i--;
+	}
+	return (new);
 }

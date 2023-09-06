@@ -5,57 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 10:59:46 by nmunir            #+#    #+#             */
-/*   Updated: 2023/09/04 15:20:09 by abashir          ###   ########.fr       */
+/*   Created: 2023/07/08 13:47:38 by abashir           #+#    #+#             */
+/*   Updated: 2023/07/19 10:54:58 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count_wrd(char const *s, char c)
+static int	n_word(char const *s, char c)
 {
-	size_t	word_count;
+	int	i;
+	int	j;
 
-	word_count = 0;
-	while (*s)
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
 	{
-		if (*s == c)
-			s++;
-		else
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
 		{
-			word_count++;
-			while (*s && *s != c)
-				s++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			j++;
 		}
 	}
-	return (word_count);
+	return (j);
+}
+
+static int	n_chr(char const *s, char c, int start)
+{
+	int	i;
+
+	i = 0;
+	while (s[start] == c)
+		start++;
+	while (s[start] != '\0' && s[start] != c)
+	{
+		start++;
+		i++;
+	}
+	return (i);
+}
+
+static int	ft_fill(char const *s, char *res, int i, char c)
+{
+	int	k;
+
+	k = 0;
+	while (s[i] == c)
+		i++;
+	while (s[i] != c && s[i])
+	{
+		res[k] = s[i];
+		k++;
+		i++;
+	}
+	res[k] = '\0';
+	i++;
+	return (i);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	len;
-	char	**words;
-	size_t	index;
-	size_t	wrd_cnt;
+	int		n_w;
+	int		i;
+	int		j;
+	char	**res;
 
-	if (s == NULL)
+	i = 0;
+	j = 0;
+	if (!s)
 		return (NULL);
-	index = 0;
-	wrd_cnt = count_wrd(s, c);
-	words = (char **)malloc(sizeof(char *) * (wrd_cnt + 1));
-	if (words == NULL)
+	n_w = n_word(s, c);
+	res = (char **)malloc(sizeof(char *) * (n_w + 1));
+	if (res == NULL)
 		return (NULL);
-	while (*s)
+	while (j < n_w)
 	{
-		while (*s == c)
-			s++;
-		len = 0;
-		while (s[len] != c && s[len])
-			len++;
-		if (index < wrd_cnt)
-			words[index++] = ft_substr(s, 0, len);
-		s += len;
+		res[j] = malloc(sizeof(char) * (n_chr(s, c, i) + 1));
+		i = ft_fill(s, res[j], i, c);
+		j++;
 	}
-	words[index] = NULL;
-	return (words);
+	res[j] = NULL;
+	return (res);
 }

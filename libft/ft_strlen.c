@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/09 11:40:35 by nmunir            #+#    #+#             */
-/*   Updated: 2023/09/01 17:34:39 by abashir          ###   ########.fr       */
+/*   Created: 2023/07/08 13:48:40 by abashir           #+#    #+#             */
+/*   Updated: 2023/07/08 16:05:34 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
 }

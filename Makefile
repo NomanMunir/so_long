@@ -6,7 +6,7 @@
 #    By: abashir <abashir@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/10 15:18:50 by abashir           #+#    #+#              #
-#    Updated: 2023/09/05 14:46:05 by abashir          ###   ########.fr        #
+#    Updated: 2023/09/06 16:43:38 by abashir          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ SRC = 	get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
 		create_array.c \
 		utils.c \
-		is_map_valid.c \
-		flood_fill.c \
-		error.c \
+		map_checking_1.c \
+		map_checking_2.c \
+		error_handling.c \
 		events.c \
 		init_game.c \
-		move.c \
+		movement.c \
 		main.c
 		
 OBJ = $(SRC:.c=.o)

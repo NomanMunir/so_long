@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 18:39:38 by abashir           #+#    #+#             */
+/*   Updated: 2023/09/06 18:39:40 by abashir          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
 
@@ -17,11 +28,10 @@ void	imgs_destroy(t_data	*img)
 
 int	on_destroy(t_data *data)
 {
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	ft_free_arr(data->map.array);
 	imgs_destroy(data);
-	free(data->mlx_ptr);
-	ft_putstr_fd("Window closed\n", 2);
 	exit(0);
 	return (0);
 }
@@ -41,10 +51,10 @@ int	key_press(int keycode, t_data *img)
 	return (0);
 }
 
-void	ft_event(t_data *img)
+void	ft_event(t_data *data)
 {
-	img->steps = 0;
-	mlx_hook(img->win_ptr, 2, 1L << 0, key_press, img);
-	mlx_hook(img->win_ptr, 17, 0L, on_destroy, img);
-	mlx_loop(img->mlx_ptr);
+	data->steps = 0;
+	mlx_hook(data->win_ptr, 2, 1L << 0, key_press, data);
+	mlx_hook(data->win_ptr, 17, 0L, on_destroy, data);
+	mlx_loop(data->mlx_ptr);
 }

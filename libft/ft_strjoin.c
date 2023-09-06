@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/09 11:32:23 by nmunir            #+#    #+#             */
-/*   Updated: 2023/09/04 16:34:23 by abashir          ###   ########.fr       */
+/*   Created: 2023/07/08 13:48:12 by abashir           #+#    #+#             */
+/*   Updated: 2023/07/18 18:25:31 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*joined;
-	size_t	lens1;
-	size_t	lens2;
-	size_t	totallen;
-	size_t	i;
+	int		i;
+	int		j;
+	char	*new;
 
+	i = 0;
+	j = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	lens1 = ft_strlen(s1);
-	lens2 = ft_strlen(s2);
-	i = 0;
-	totallen = lens1 + lens2 + 1;
-	joined = (char *)malloc(sizeof(char) * totallen);
-	if (joined != NULL)
+	new = (char *)malloc(sizeof(char) *(ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (new == NULL)
+		return ((char *) NULL);
+	while (s1[i] != '\0')
 	{
-		while (*s1)
-			joined[i++] = *s1++;
-		while (*s2)
-			joined[i++] = *s2++;
-		joined[i] = '\0';
+		new[i] = s1[i];
+		i++;
 	}
-	return (joined);
+	while (s2[j] != '\0')
+	{
+		new[i] = s2[j];
+		i++;
+		j++;
+	}
+	new[i] = '\0';
+	return (new);
 }
