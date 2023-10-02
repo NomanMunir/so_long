@@ -5,63 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/09 16:39:09 by nmunir            #+#    #+#             */
-/*   Updated: 2023/09/04 16:26:48 by abashir          ###   ########.fr       */
+/*   Created: 2023/07/08 13:49:25 by abashir           #+#    #+#             */
+/*   Updated: 2023/07/13 18:51:14 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static bool	is_char_in_set(char c, char const *set)
+static void	ft_strcpy(char *new, const char *s1, int start, int end)
 {
-	while (*set)
+	int	j;
+
+	j = 0;
+	end = ft_strlen(s1) - end;
+	while (s1[start] && start < end)
 	{
-		if (*set == c)
-			return (true);
-		set++;
+		new[j] = s1[start];
+		start++;
+		j++;
 	}
-	return (false);
+	new[j] = '\0';
 }
 
-static size_t	sublength(const char *s1, const char *set)
+static int	ft_find(char const s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
+	size_t	j;
 
-	start = 0;
-	end = 0;
-	while (s1[start] && (is_char_in_set(s1[start], set)))
-		start++;
-	while (s1[end])
-		end++;
-	end--;
-	while (end > start && is_char_in_set(s1[end], set))
-		end--;
-	return (end - start + 1);
+	j = 0;
+	while (set[j] != '\0')
+	{
+		if (set[j] == s1)
+			return (1);
+		j++;
+	}
+	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
-	char	*result;
-	size_t	total_len;
-	size_t	start;
+	size_t	s;
+	size_t	e;
+	size_t	len_s;
+	char	*new;
 
-	if (!s1 || !set)
+	if (s1 == NULL)
 		return (NULL);
-	i = 0;
-	start = 0;
-	while (s1[start] && (is_char_in_set(s1[start], set)))
-		start++;
-	total_len = sublength(s1, set);
-	result = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (result == NULL)
-		return (NULL);
-	while (i < total_len)
+	s = 0;
+	e = 0;
+	len_s = ft_strlen(s1);
+	while (s1[s] && ft_find(s1[s], set))
+		s++;
+	while (s1[len_s - 1 - e] && ft_find(s1[len_s - 1 - e], set))
+		e++;
+	if (e == len_s || s == len_s)
+		new = (char *)malloc(sizeof(char) * 1);
+	else
+		new = (char *)malloc(sizeof(char) *(len_s - s - e + 1));
+	if (new)
 	{
-		result[i] = s1[start + i];
-		i++;
+		ft_strcpy(new, s1, s, e);
+		return (new);
 	}
-	result[i] = '\0';
-	return (result);
+	return (NULL);
 }

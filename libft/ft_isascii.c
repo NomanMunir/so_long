@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmunir <nmunir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 16:08:39 by nmunir            #+#    #+#             */
-/*   Updated: 2023/07/04 08:43:58 by nmunir           ###   ########.fr       */
+/*   Created: 2023/07/08 13:45:16 by abashir           #+#    #+#             */
+/*   Updated: 2023/07/08 15:51:24 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int	ft_isascii(int c)
 {
-	return (c >= 0 && c <= 127);
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
 }

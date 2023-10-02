@@ -6,7 +6,7 @@
 /*   By: abashir <abashir@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:38:05 by nmunir            #+#    #+#             */
-/*   Updated: 2023/09/05 14:03:01 by abashir          ###   ########.fr       */
+/*   Updated: 2023/09/06 13:29:05 by abashir          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strspn(const char *s, char c)
 {
 	int	i;
-	int count;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -30,23 +30,46 @@ int	ft_strspn(const char *s, char c)
 
 void	ft_print_array(char **array, int row)
 {
-	for (int i = 0; i < row; i++)
-		printf("%s\n", array[i]);
+	int	i;
+
+	i = 0;
+	while (i < row)
+	{
+		ft_putstr_fd(array[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
+	}
 }
 
-void	ft_free_arr(char **p)
+void	ft_free_arr(char **ptr)
 {
 	int	i;
 
 	i = 0;
-	while (p != NULL && p[i])
+	while (ptr != NULL && ptr[i])
 	{
-		free(p[i]);
+		free(ptr[i]);
 		i++;
 	}
-	if (p)
+	if (ptr)
 	{
-		free(p);
-		p = NULL;
+		free(ptr);
+		ptr = NULL;
 	}
+}
+
+int	ft_position(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+			return (i);
+		i++;
+	}
+	if ((char)c == '\0')
+		return (i);
+	return (0);
 }
